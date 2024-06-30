@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps { 
-                git branch: "${params.BRANCH}", url: 'https://github.com/mukeshvarmag/spring-boot-crud-operation.git'
+                git branch: "${params.BRANCH}", url: 'https://github.com/priyesh1397/spring-boot-crud-operation.git'
             }
         }
         stage('Build') {

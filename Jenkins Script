@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    environment {
+        JAVA_HOME = "C:/Program Files/Java/jdk1.8.0_202"
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps { 
+                git branch: "${params.BRANCH}", url: 'https://github.com/mukeshvarmag/spring-boot-crud-operation.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Build your project (e.g., Maven, Gradle, etc.)
+               bat "\"${JAVA_HOME}\\bin\\java\" -version"
+        
+               // Build your project (e.g., Maven, Gradle, etc.)
+               bat 'mvn clean install' // Example for Maven project
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run tests
+                bat 'mvn test' // Example for Maven project
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Deploy to a local directory
+                bat 'mkdir C:\\deployments'
+                bat 'xcopy /s /y target\\*.jar C:\\deployments' // Example assuming the built JAR file is in the target directory
+            }
+        }
+    }
+}
